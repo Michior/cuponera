@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, use } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate, useParams } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import fetchOfferDetails from "../hooks/fetchOffersDetails";
@@ -7,9 +7,8 @@ export default function OfferDetails() {
     const [offer, setOffer] = useState(null);
     const navigate = useNavigate();
     const { offerId } = useParams();
-    const { selectOffer } = useContext(AuthContext); 
+    const { selectOffer, token } = useContext(AuthContext); 
     
-
     useEffect(() => {
         async function fetchData() {
             const data = await fetchOfferDetails(offerId);
@@ -20,6 +19,17 @@ export default function OfferDetails() {
 
     if (!offer) return <p>Cargando información de la oferta...</p>;
     
+    const handleBuy = () => {
+        if (!token) {
+            alert("Debes iniciar sesión antes de comprar.");
+            navigate("/cliente/login"); // Redirige a la página de inicio de sesión
+            return;
+        }
+
+        selectOffer(offerId);
+        navigate(`/detalleOferta/${offerId}/buy`);
+    };
+
     return (
         <div className="relative bg-fondo p-4 rounded-lg shadow-md w-full h-auto mx-auto">
             <div className="container mx-auto p-4 bg-white rounded-lg shadow-lg max-w-2xl">
@@ -33,10 +43,7 @@ export default function OfferDetails() {
                 <p className="mt-1">Válido desde {new Date(offer.offer.validFrom).toLocaleDateString()} hasta {new Date(offer.offer.validUntil).toLocaleDateString()}</p>
 
                 <button 
-                    onClick={() => {
-                        selectOffer(offerId);
-                        navigate(`/detalleOferta/${offerId}/buy`);
-                    }} 
+                    onClick={handleBuy} 
                     className="bg-primary py-2.5 w-full mt-4 rounded-lg text-white text-center hover:bg-resaltador transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-96"
                 >
                     Comprar
