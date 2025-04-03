@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { OffertCard } from "./OffertCard";
 import { fetchOffers } from "../hooks/fetchOffer";
+import Filtro from "../components/header/Filtro";
 
 
 export const Ofertas = () => {
@@ -27,7 +28,7 @@ export const Ofertas = () => {
 
     return (
         <>
-            {/*<Filtro/>*/}
+            <Filtro/>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-15 py-5">
                 {offers.length > 0 ? (
                     offers.map((offer) => <OffertCard key={offer.id} offer={offer} />)
