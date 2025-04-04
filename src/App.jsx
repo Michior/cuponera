@@ -10,7 +10,10 @@ import CuponDetails from "./cuponsviewers/CuponDetails";
 import { IniciarSesion } from "./user/Iniciarsesion";
 import { Registro } from "./user/Registro";
 import MiPerfil from "./user/MiPerfil";
-
+import CuponValid from "./cuponsviewers/CuponValid";
+import { CuponesValidos } from "./cuponsviewers/CuponesValidos";
+import { CuponesReclamados } from "./cuponsviewers/CuponesReclamados";
+import CuponExpired from "./cuponsviewers/CuponExpired";
 
 function App() {
 
@@ -38,6 +41,9 @@ function App() {
             <Route path='/detalleCupon'>
                 <Route path=':couponCode' element={<CuponAdquirido/>} />
                 <Route path=':couponCode/detalle' element={<CuponDetails/>} />
+                <Route path='detalle/valido' element={<CuponesValidos/>} />
+                <Route path='detalle/reclamado' element={<CuponesReclamados/>} />
+                <Route path='detalle/vencidos' element={<CuponExpired/>} />
             </Route>
 
 

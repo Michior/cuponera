@@ -11,28 +11,47 @@ const UserMenu = () => (
             <ChevronDownIcon className="w-5 h-5 ml-2" />
         </Menu.Button>
 
-        <Menu.Items className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-1">
+        <Menu.Items className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-1 z-50">
             <Menu.Item>
                 {({ active }) => (
-                    <NavLink to="/misCupones" className={`block px-4 py-2 text-black ${active ? 'bg-gray-200' : ''}`}>
-                        Cupones Disponibles
-                    </NavLink>
-                )}
-            </Menu.Item>
-            {/* <Menu.Item>
-                {({ active }) => (
-                    <NavLink to="/canjeados" className={`block px-4 py-2 text-black ${active ? 'bg-gray-200' : ''}`}>
-                        Cupones Canjeados
+                    <NavLink 
+                        to="/misCupones" 
+                        className={`block px-4 py-2 text-black ${active ? 'bg-gray-200' : ''}`}
+                    >
+                        Todos mis cupones
                     </NavLink>
                 )}
             </Menu.Item>
             <Menu.Item>
                 {({ active }) => (
-                    <NavLink to="/expirados" className={`block px-4 py-2 text-black ${active ? 'bg-gray-200' : ''}`}>
-                        Cupones Vencidos
+                    <NavLink 
+                        to="detalleCupon/detalle/valido" 
+                        className={`block px-4 py-2 text-black ${active ? 'bg-gray-200' : ''}`}
+                    >
+                        Cupones validos
                     </NavLink>
                 )}
-            </Menu.Item> */}
+            </Menu.Item>
+            <Menu.Item>
+                {({ active }) => (
+                    <NavLink 
+                        to="detalleCupon/detalle/reclamado" 
+                        className={`block px-4 py-2 text-black ${active ? 'bg-gray-200' : ''}`}
+                    >
+                        Cupones reclamados
+                    </NavLink>
+                )}
+            </Menu.Item>
+            <Menu.Item>
+                {({ active }) => (
+                    <NavLink 
+                        to="detalleCupon/detalle/vencidos" 
+                        className={`block px-4 py-2 text-black ${active ? 'bg-gray-200' : ''}`}
+                    >
+                        Cupones expirados
+                    </NavLink>
+                )}
+            </Menu.Item>
         </Menu.Items>
     </Menu>
 );

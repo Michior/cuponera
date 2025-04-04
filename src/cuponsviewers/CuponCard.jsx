@@ -1,48 +1,79 @@
-import React, { useContext } from "react";
-import { useNavigate } from "react-router";
-import { AuthContext } from "../context/AuthContext";
+import React, { useContext } from "react"
+import { useNavigate } from "react-router"
+import { AuthContext } from "../context/AuthContext"
+import { Calendar, Tag, CheckCircle } from "lucide-react"
 
 export const CuponCard = ({ coupon }) => {
-    const navigate = useNavigate();
-    const {selectCupon} = useContext(AuthContext);
+  const navigate = useNavigate()
+  const { selectCupon } = useContext(AuthContext)
 
+  if (!coupon) return null
 
-    if (!coupon) return null;
+  const handleCuponClick = () => {
+    selectCupon(coupon.offerDetails.id)
+    navigate(`/detalleCupon/${coupon.code}/detalle`)
+  }
 
-    const handleCuponClick = () => {
-        selectCupon(coupon.offerDetails.id);
-        navigate(`/detalleCupon/${coupon.code}/detalle`);
-    }
+  const discountPercentage = Math.round(
+    ((coupon.offerDetails.originalPrice - coupon.offerDetails.discountPrice) / coupon.offerDetails.originalPrice) * 100
+  )
 
-    return (
-        <div className="relative bg-fondo2 p-4 rounded-lg shadow-md w-full h-auto mx-auto">
-            <div className="absolute top-2 right-2 bg-resaltador2 text-white text-sm font-bold px-2 py-1 rounded-full">
-                <p>{Math.round(((coupon.offerDetails.discountPrice * 1) / coupon.offerDetails.originalPrice) * 100)}%</p>
-            </div>
-            <div className="h-auto">
-                <img src={"./public/img/Cuponazo.png"} alt="Cupón" className="w-full h-40 object-cover rounded-md" />
-                <p className="mt-3 font-bold">{coupon.offerDetails.title}</p>
-                <p className="text-black">{coupon.offerDetails.description}</p>
-                <p
-                  className={`inline-block px-3 py-1 rounded-full text-sm font-semibold mt-2 ${
-                    coupon.couponState === "VALID"
-                      ? "bg-green-200 text-green-800"
-                      : coupon.couponState === "reclamado"
-                      ? "bg-yellow-200 text-yellow-800"
-                      : "bg-gray-200 text-gray-600"
-                  }`}
-                >
-                    Cupon {coupon.couponState}
-                </p>
+  return (
+    <div className="relative bg-white p-5 rounded-xl shadow-lg border border-gray-200 transition-all duration-300 hover:shadow-xl">
+      {/* Descuento en la esquina */}
+      <div className="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">
+        {discountPercentage}% OFF
+      </div>
 
-                <p>Válido hasta: {new Date(coupon.offerDetails.validUntil).toLocaleDateString()}</p>
-            </div>
-            <button
-                className="bg-primary2 h-7 w-full mt-4 rounded text-white items-center text-center hover:bg-resaltador2 transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-96"
-                onClick={handleCuponClick} 
-            >
-                Ver cupón
-            </button>
+      {/* Imagen */}
+      <div className="relative overflow-hidden rounded-lg">
+        <img
+          src={"./public/img/Cuponazo.png"}
+          alt="Cupón"
+          className="w-full h-48 object-cover rounded-lg transition-transform duration-300 hover:scale-105"
+        />
+      </div>
+
+      {/* Contenido */}
+      <div className="mt-4">
+        <h3 className="text-xl font-semibold text-gray-800 line-clamp-1 hover:text-blue-600 transition-colors">
+          {coupon.offerDetails.title}
+        </h3>
+
+        <p className="text-gray-600 mt-2 text-sm line-clamp-2">{coupon.offerDetails.description}</p>
+
+        {/* Estado del cupón */}
+        <div className="flex items-center gap-2 mt-3">
+          <Tag className="h-5 w-5 text-gray-400" />
+          <span
+            className={`px-3 py-1 text-xs font-semibold rounded-full ${
+              coupon.couponState === "VALID"
+                ? "bg-green-200 text-green-800"
+                : coupon.couponState === "USED"
+                ? "bg-red-200 text-red-800"
+                : "bg-gray-200 text-gray-600"
+            }`}
+          >
+            {coupon.couponState === "VALID" ? "Disponible" : "Reclamado"}
+          </span>
         </div>
-    );
-};
+
+        {/* Fecha de validez */}
+        <div className="flex items-center gap-2 mt-2 text-gray-500 text-sm">
+          <Calendar className="h-5 w-5 text-gray-400" />
+          <span>Válido hasta: {new Date(coupon.offerDetails.validUntil).toLocaleDateString()}</span>
+        </div>
+
+        {/* Botón */}
+        <button
+          className="mt-4 w-full bg-blue-600 text-white text-lg py-2 rounded-lg hover:bg-blue-700 transition-all"
+          onClick={handleCuponClick}
+        >
+          Ver cupón
+        </button>
+      </div>
+    </div>
+  )
+}
+
+export default CuponCard;

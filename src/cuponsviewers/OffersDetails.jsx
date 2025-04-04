@@ -31,8 +31,8 @@ export default function OfferDetails() {
     };
 
     return (
-        <div className="relative bg-fondo p-4 rounded-lg shadow-md w-full h-auto mx-auto">
-            <div className="container mx-auto p-4 bg-white rounded-lg shadow-lg max-w-2xl">
+        <div className="p-4 rounded-lg shadow-md w-full h-auto mx-auto">
+            <div className="container mx-auto p-4 bg-fondo rounded-lg shadow-lg max-w-2xl">
                 <h2 className="text-3xl text-center text-primary font-extrabold mb-4">Detalles de la Oferta</h2>
                 <img src={"/public/img/Cuponazo.png"} alt="Cupón" className="place-self-center w-auto h-40" />
                 <h3 className="text-2xl font-semibold text-resaltador mb-2 mt-2">{offer.offer.title}</h3>
