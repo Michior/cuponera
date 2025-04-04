@@ -29,6 +29,9 @@ export const Ofertas = () => {
     return (
         <>
             {/*<Filtro/>*/}
+            <p className="text-primary text-3xl font-bold mt-4 text-center">
+                        ¡Ofertas! 💖
+            </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-15 py-5">
                 {offers.length > 0 ? (
                     offers.map((offer) => <OffertCard key={offer.id} offer={offer} />)

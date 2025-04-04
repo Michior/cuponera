@@ -7,7 +7,7 @@ export default function OfferDetails() {
     const [offer, setOffer] = useState(null);
     const navigate = useNavigate();
     const { offerId } = useParams();
-    const { selectOffer, token } = useContext(AuthContext); 
+    const { selectOffer, token } = useContext(AuthContext);
     
     useEffect(() => {
         async function fetchData() {
@@ -17,38 +17,40 @@ export default function OfferDetails() {
         fetchData();
     }, [offerId]);
 
-    if (!offer) return <p>Cargando información de la oferta...</p>;
+    if (!offer) return <p className="text-center text-gray-600">Cargando información de la oferta...</p>;
     
     const handleBuy = () => {
         if (!token) {
             alert("Debes iniciar sesión antes de comprar.");
-            navigate("/cliente/login"); // Redirige a la página de inicio de sesión
+            navigate("/cliente/login");
             return;
         }
-
         selectOffer(offerId);
         navigate(`/detalleOferta/${offerId}/buy`);
     };
 
     return (
-        <div className="p-4 rounded-lg shadow-md w-full h-auto mx-auto">
-            <div className="container mx-auto p-4 bg-fondo rounded-lg shadow-lg max-w-2xl">
-                <h2 className="text-3xl text-center text-primary font-extrabold mb-4">Detalles de la Oferta</h2>
-                <img src={"/public/img/Cuponazo.png"} alt="Cupón" className="place-self-center w-auto h-40" />
-                <h3 className="text-2xl font-semibold text-resaltador mb-2 mt-2">{offer.offer.title}</h3>
-                <p className="text-lg">{offer.offer.description}</p>
-                <p className="font-bold line-through">Precio normal: ${offer.offer.originalPrice}</p>
-                <p className="text-xl font-bold text-primary">Precio con descuento: ${offer.offer.discountPrice}</p>
-                <p className="text-lg font-bold mt-2">Período de Validez</p>
-                <p className="mt-1">Válido desde {new Date(offer.offer.validFrom).toLocaleDateString()} hasta {new Date(offer.offer.validUntil).toLocaleDateString()}</p>
-
+        <div className="flex justify-center items-center min-h-screen p-4">
+            <div className="bg-white shadow-xl rounded-2xl max-w-lg p-6 border border-gray-200">
+                <h2 className="text-3xl text-center font-extrabold text-blue-600 mb-4">Detalles de la Oferta</h2>
+                <div className="flex justify-center">
+                    <img src={"/public/img/Cuponazo.png"} alt="Cupón" className="w-80 h-48 object-cover rounded-lg shadow-md" />
+                </div>
+                <h3 className="text-2xl font-semibold text-gray-800 mt-4 mb-2">{offer.offer.title}</h3>
+                <p className="text-gray-600 text-lg mb-3">{offer.offer.description}</p>
+                <p className="text-gray-500 line-through font-medium">Precio normal: ${offer.offer.originalPrice}</p>
+                <p className="text-xl font-bold text-green-600">Precio con descuento: ${offer.offer.discountPrice}</p>
+                <div className="mt-4 p-3 bg-gray-100 rounded-lg">
+                    <p className="text-lg font-semibold text-gray-700">Período de Validez</p>
+                    <p className="text-gray-600">Desde {new Date(offer.offer.validFrom).toLocaleDateString()} hasta {new Date(offer.offer.validUntil).toLocaleDateString()}</p>
+                </div>
                 <button 
                     onClick={handleBuy} 
-                    className="bg-primary py-2.5 w-full mt-4 rounded-lg text-white text-center hover:bg-resaltador transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-96"
+                    className="w-full mt-5 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition transform hover:scale-105"
                 >
                     Comprar
                 </button>
             </div>
         </div>
     );
-}
+};

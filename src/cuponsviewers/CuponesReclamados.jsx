@@ -19,10 +19,15 @@ export const CuponesReclamados = () => {
     if (!coupons.length) return <p className="text-gray-500">No hay cupones disponibles.</p>;
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-15 py-5">
-            {coupons.map((coupon) => (
-                <CuponReedem key={coupon.id} coupon={coupon} />
-            ))}
-        </div>
+        <>
+                <p className="text-primary text-3xl font-bold mt-4 text-center">
+                ¡Cupones Reclamados! 💖
+        </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-15 py-5">
+                {coupons.map((coupon) => (
+                    <CuponReedem key={coupon.id} coupon={coupon} />
+                ))}
+            </div>
+        </>
     );
 };

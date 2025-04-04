@@ -13,7 +13,7 @@ export const CuponesReclamados = () => {
             setCoupons(coupons);
             setError(error);
         };
-        getCoupons();
+        getCoupons(); 
     }, []);
 
     if (error) return <p className="text-red-600">Error: {error}</p>;

@@ -4,19 +4,19 @@ import { Menu } from '@headlessui/react';
 import { NavLink } from 'react-router';
 
 const UserMenu = () => (
-    <Menu as="div" className="relative inline-block text-left">
-        <Menu.Button className="flex items-center bg-primary text-white px-4 py-2 rounded">
+    <Menu as="div" className="relative inline-block text-left z-[9999]">
+        <Menu.Button className="flex items-center bg-primary text-white px-4 py-2 rounded z-[9999] relative">
             <TicketIcon className="w-5 h-5 mr-2" />
             Mis Cupones
             <ChevronDownIcon className="w-5 h-5 ml-2" />
         </Menu.Button>
 
-        <Menu.Items className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-md py-1 z-50">
+        <Menu.Items className="absolute right-0 mt-2 w-56 bg-white shadow-2xl rounded-xl py-2 z-[9999] border border-gray-200">
             <Menu.Item>
                 {({ active }) => (
                     <NavLink 
                         to="/misCupones" 
-                        className={`block px-4 py-2 text-black ${active ? 'bg-gray-200' : ''}`}
+                        className={`block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 ${active ? 'bg-gray-100' : ''}`}
                     >
                         Todos mis cupones
                     </NavLink>
@@ -26,9 +26,9 @@ const UserMenu = () => (
                 {({ active }) => (
                     <NavLink 
                         to="detalleCupon/detalle/valido" 
-                        className={`block px-4 py-2 text-black ${active ? 'bg-gray-200' : ''}`}
+                        className={`block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 ${active ? 'bg-gray-100' : ''}`}
                     >
-                        Cupones validos
+                        Cupones válidos
                     </NavLink>
                 )}
             </Menu.Item>
@@ -36,7 +36,7 @@ const UserMenu = () => (
                 {({ active }) => (
                     <NavLink 
                         to="detalleCupon/detalle/reclamado" 
-                        className={`block px-4 py-2 text-black ${active ? 'bg-gray-200' : ''}`}
+                        className={`block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 ${active ? 'bg-gray-100' : ''}`}
                     >
                         Cupones reclamados
                     </NavLink>
@@ -46,7 +46,7 @@ const UserMenu = () => (
                 {({ active }) => (
                     <NavLink 
                         to="detalleCupon/detalle/vencidos" 
-                        className={`block px-4 py-2 text-black ${active ? 'bg-gray-200' : ''}`}
+                        className={`block px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 ${active ? 'bg-gray-100' : ''}`}
                     >
                         Cupones expirados
                     </NavLink>
