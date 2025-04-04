@@ -13,7 +13,7 @@ export const MiPerfil = () => {
             <>
             <div className="flex flex-col items-center justify-center min-h-screen">
                 <p className="text-gray-700 text-lg">Sesión inactiva.</p>
-                <NavLink to="/login" className="bg-primary text-white px-4 py-2 rounded">
+                <NavLink to="/cliente/login" className="bg-primary text-white px-4 py-2 rounded">
                 Iniciar Sesión
                 </NavLink>
             </div>

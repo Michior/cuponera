@@ -23,11 +23,18 @@ export const CuponCard = ({ coupon }) => {
                 <img src={"./public/img/Cuponazo.png"} alt="Cupón" className="w-full h-40 object-cover rounded-md" />
                 <p className="mt-3 font-bold">{coupon.offerDetails.title}</p>
                 <p className="text-black">{coupon.offerDetails.description}</p>
-                {coupon.redeemed ? (
-                    <p className="font-bold text-red-600">Reclamado</p>
-                    ) : (
-                    <p className="font-bold text-green-600">Vigente</p>
-                    )}
+                <p
+                  className={`inline-block px-3 py-1 rounded-full text-sm font-semibold mt-2 ${
+                    coupon.couponState === "VALID"
+                      ? "bg-green-200 text-green-800"
+                      : coupon.couponState === "reclamado"
+                      ? "bg-yellow-200 text-yellow-800"
+                      : "bg-gray-200 text-gray-600"
+                  }`}
+                >
+                    Cupon {coupon.couponState}
+                </p>
+
                 <p>Válido hasta: {new Date(coupon.offerDetails.validUntil).toLocaleDateString()}</p>
             </div>
             <button
