@@ -37,7 +37,7 @@ export const CuponExpired = ({ coupon }) => {
           {/* Imagen */}
           <div className="relative overflow-hidden rounded-lg">
             <img
-              src={"/public/img/Cuponazo.png"}
+              src={"/Cuponazo.png"}
               alt="Cupón"
               className="w-full h-48 object-cover rounded-lg transition-transform duration-300 hover:scale-105"
             />
